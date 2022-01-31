@@ -11,7 +11,7 @@ class Connection:
 
 
 class Database(Connection):
-    def __init__(self):
+    def __init__(self, csvfile):
         super(Database, self).__init__()
         self.cursor = self.conn.cursor()
         self.cursor.execute("""create table if not exists city_inf(
@@ -22,7 +22,7 @@ class Database(Connection):
             lat real not null, 
             lon real not null);""")
 
-        with open('data.csv', 'r', newline='\n', encoding = 'utf-8') as file:
+        with open(csvfile, 'r', newline='\n', encoding = 'utf-8') as file:
             reader = csv.DictReader(file)
             recods = []
             for row in reader:
@@ -30,5 +30,3 @@ class Database(Connection):
             self.cursor.executemany("insert into city_inf (id, region, municipality, settlement, lat, lon)\
                     values (?,?,?,?,?,?)", recods)
             self.conn.commit()
-
-d = Database()
