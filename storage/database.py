@@ -2,6 +2,8 @@ import sqlite3
 import csv
 from dataclasses import dataclass
 
+from .storage_api import StorageAPI
+
 
 class Connection:
     def __init__(self):
@@ -21,7 +23,7 @@ class Settlement:
     lon: float
 
 
-class Database(Connection):
+class Database(Connection, StorageAPI):
 
     def __init__(self, csvfile):
         super(Database, self).__init__()
