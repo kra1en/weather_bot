@@ -5,5 +5,5 @@ from storage.data_type import Coordinates
 
 class WeatherAPI(ABC):
     @abstractmethod
-    def get_weather_data(self, coordinates: Coordinates) -> WeatherInfo:
+    def get_weather_data(self, coordinates: Coordinates) -> list[WeatherInfo]:
         pass
