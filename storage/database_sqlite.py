@@ -1,10 +1,10 @@
 import os
 import sqlite3
-import csv
 
 from .database_api import DatabaseAPI
 from .data_type import Settlement, Coordinates
 from .sql import Queries
+from .extract_data import extract
 
 
 class DatabaseSQLite(DatabaseAPI):
@@ -16,19 +16,7 @@ class DatabaseSQLite(DatabaseAPI):
         self.cursor = self.conn.cursor()
         self.cursor.execute(Queries.CREAT_TABLE_QUERY)
         if not is_file:
-            with open(csvfile, 'r', newline='\n', encoding='utf-8') as file:
-                reader = csv.DictReader(file)
-                records = []
-                for row in reader:
-                    records.append((
-                        row['id'],
-                        row['region'].lower(),
-                        row['municipality'].lower(),
-                        row['settlement'].lower(),
-                        row['latitude_dd'],
-                        row['longitude_dd']
-                    ))
-            self.cursor.executemany(Queries.INSERT_DATA_QUERY, records)
+            self.cursor.executemany(Queries.INSERT_DATA_QUERY, extract(csvfile))
         self.conn.commit()
 
     def get_settlements(self, settlement):
