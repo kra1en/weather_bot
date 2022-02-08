@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from .data_type import Settlement, Coordinates
 
 
-class StorageAPI(ABC):
+class DatabaseAPI(ABC):
     @abstractmethod
     def get_settlements(self, settlement) -> list[Settlement]:
         pass
