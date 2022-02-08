@@ -31,6 +31,6 @@ class DatabaseSQLite(DatabaseAPI):
         return result
 
     def get_coordinates(self, settlement_id: int):
-        self.cursor.execute(Queries.GET_COORDINATS_FROM_ID, (settlement_id,))
+        self.cursor.execute(Queries.GET_COORDINATES_BY_ID_QUERY, (settlement_id,))
         coord = self.cursor.fetchone()
         return Coordinates(lat=coord[0], lon=coord[1])
