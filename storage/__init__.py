@@ -1,5 +1,3 @@
-from .database import Database as Storage
-from .data_type import Coordinates
+from .storage import Storage
 
-
-__all__ = ['Storage', 'Coordinates']
+__all__ = ['Storage']
