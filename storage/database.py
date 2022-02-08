@@ -6,6 +6,8 @@ from .data_type import Settlement, Coordinates
 
 from .sql import Queries as sql
 
+from .storage_api import StorageAPI
+
 
 class Connection:
     def __init__(self):
