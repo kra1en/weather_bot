@@ -26,7 +26,7 @@ class Storage(metaclass=Singleton):
             else:
                 self.__db = DatabaseSQLite(db_name + ".db", csvfile=source_file)
         elif database == self.POSTGRESQL:
-            self.__db = DatabasePostgres(db_name=db_name, port=db_port)
+            self.__db = DatabasePostgres(db_name=db_name, port=db_port, csvfile=source_file)
         else:
             raise ValueError("Неизвестная база данных")
 
