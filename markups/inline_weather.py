@@ -14,7 +14,6 @@ class InlineWeather():
 
     @classmethod
     def initialization(cls, days, user_id):
-        input(f"{user_id=} {type(user_id)=}")
         cls.markup = InlineKeyboardMarkup(row_width=2)
         cls.markup.add(InlineKeyboardButton(text="<-", callback_data=cls.callback_data.new('time_down')),InlineKeyboardButton(text="->", callback_data=cls.callback_data.new('time_up')))
         cls.markup.add(InlineKeyboardButton(text="<-", callback_data=cls.callback_data.new('day_down')),InlineKeyboardButton(text="->", callback_data=cls.callback_data.new('day_up')))
@@ -22,7 +21,6 @@ class InlineWeather():
 
     @classmethod
     def update(cls, user_id, action=None):
-        input(f"{user_id=} {type(user_id)=}")
         return cls.__instances[user_id]._update(action)
 
     @classmethod
@@ -36,10 +34,10 @@ class InlineWeather():
         self.current_day = (self.current_day-1)%7
 
     def time_up(self):
-        self.current_time = (self.current_time+1)%3
+        self.current_time = (self.current_time+1)%4
 
     def time_down(self):
-        self.current_time = (self.current_time-1)%3
+        self.current_time = (self.current_time-1)%4
 
     def _update(self, action=None):
         cdw = self.days[self.current_day]
