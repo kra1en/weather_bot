@@ -33,6 +33,6 @@ storage = Storage(
     db_port=cfg.db.postgres.port
 )
 
-engine = WebhookModel() if 'webhook' == args.mode else PollingModel()
+engine = WebhookModel() if 'webhook' == args.mode[0] else PollingModel()
 dp = engine.get_dispatcher()
 bot = engine.get_bot()
