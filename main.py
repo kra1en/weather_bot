@@ -1,4 +1,4 @@
-from handlers import dp
+from core.handlers import dp
 from loader import engine
 
 if __name__ == '__main__':
