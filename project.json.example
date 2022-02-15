@@ -10,7 +10,7 @@
         "host": "localhost",
         "port": 3000
     },
-    "database": {
+    "db": {
         "sqlite": {
             "file": "example.db"
         },
@@ -28,5 +28,8 @@
             "user": "db_user_name",
             "password": "db_user_password"
         }
+    },
+    "src": {
+        "file": "data.csv"
     }
 }
