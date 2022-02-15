@@ -128,9 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# data files
-*.csv
-*.db
+# IDE
+.idea/
 
-# config
-config.py
+# project config
+project.json
