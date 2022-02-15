@@ -6,17 +6,15 @@ from aiogram.utils.executor import start_webhook, start_polling
 from loguru import logger as log
 
 from abc import ABC, abstractmethod
-from types import SimpleNamespace
-import json
 
 from utils.singletone import SingletonABC
+from utils.json_config_reader import parse_config
 
 
 class AbstractModel(SingletonABC):
 
     def __init__(self, config_file_name='project.json'):
-        with open(config_file_name, "r") as file:
-            self.config = json.loads(file.read(), object_hook=lambda data: SimpleNamespace(**data))
+        self.config = parse_config(config_file_name)
         self._bot = Bot(token=self.config.api.token)
         self._dispatcher = Dispatcher(self._bot)
         self._dispatcher.middleware.setup(LoggingMiddleware())
