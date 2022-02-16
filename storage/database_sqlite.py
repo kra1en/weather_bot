@@ -20,7 +20,7 @@ class DatabaseSQLite(DatabaseAPI):
         self.conn.commit()
 
     def get_settlements(self, settlement):
-        self.cursor.execute(Queries.SELECT_SETTLEMENTS_QUERY, (settlement + '%',))
+        self.cursor.execute(Queries.SELECT_SETTLEMENTS_QUERY, (settlement.lower() + '%', '% ' + settlement.lower() + '%', '%-' + settlement.lower() + '%'))
         result = []
         for row in self.cursor.fetchall():
             result.append(Settlement(
