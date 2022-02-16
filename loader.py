@@ -2,7 +2,9 @@ from utils import WebhookModel, PollingModel, parse_config
 from storage import Storage
 import argparse
 
-__all__ = ['dp', 'engine', 'bot']
+from weather import WeatherService
+
+__all__ = ['dp', 'engine', 'bot', 'storage', 'weather']
 
 parser = argparse.ArgumentParser("main.py")
 
@@ -25,13 +27,16 @@ parser.add_argument("--in-memory", action='store_true',
 args = parser.parse_args()
 cfg = parse_config('project.json')
 
+weather = WeatherService()
+
 storage = Storage(
-    database=Storage.SQLITE if args.database[0] == 'sqlite' else Storage.POSTGRESQL,
+    database=Storage.SQLITE if args.database == 'sqlite' else Storage.POSTGRESQL,
     in_memory=args.in_memory,
     source_file=cfg.src.file,
-    db_name=cfg.db.sqlite.file if args.database[0] == 'sqlite' else cfg.db.postgres.name,
+    db_name=cfg.db.sqlite.file if args.database == 'sqlite' else cfg.db.postgres.name,
     db_port=cfg.db.postgres.port
 )
+
 
 engine = WebhookModel() if 'webhook' == args.mode[0] else PollingModel()
 dp = engine.get_dispatcher()
