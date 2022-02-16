@@ -15,7 +15,7 @@ class Queries:
         """
     SELECT_SETTLEMENTS_QUERY = """
             select c1.id, c1.settlement, c1.region 
-            from city_info c1 where c1.settlement like lower(?) LIMIT 25;
+            from city_info c1 where c1.settlement like (?) or c1.settlement like (?) or c1.settlement like (?) LIMIT 25;
         """
     GET_COORDINATES_BY_ID_QUERY = """
         select lat, lon from city_info
