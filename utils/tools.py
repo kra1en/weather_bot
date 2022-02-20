@@ -10,20 +10,28 @@ from abc import ABC, abstractmethod
 from utils.singletone import SingletonABC
 from utils.json_config_reader import parse_config
 
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+
+
 
 class AbstractModel(SingletonABC):
 
     def __init__(self, config_file_name='project.json'):
         self.config = parse_config(config_file_name)
         self._bot = Bot(token=self.config.api.token)
-        self._dispatcher = Dispatcher(self._bot)
+        self._memory_storage = MemoryStorage()
+        self._dispatcher = Dispatcher(self._bot, storage = self._memory_storage)
         self._dispatcher.middleware.setup(LoggingMiddleware())
+        
 
     def get_dispatcher(self):
         return self._dispatcher
 
     def get_bot(self):
         return self._bot
+
+    def get_storage(self):
+        return self._memory_storage
 
     @abstractmethod
     async def on_startup(self, _dispatcher):
