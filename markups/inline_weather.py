@@ -1,6 +1,6 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.callback_data import CallbackData
-from markups.dicts_weather import dict_wind, dict_cond, dict_part
+from markups.dicts_weather import dict_wind, dict_cond, dict_part, dict_emoji
 import datetime
 
 
@@ -89,7 +89,7 @@ class InlineWeather():
     def __format(self, data):
         return \
             f"Дата: {self.dict_date[self.current_day].strftime('%d.%m')}\n"\
-            f"Время дня: {dict_part[self.current_time]}\n"\
+            f"Время дня: {dict_part[self.current_time]} {dict_emoji[self.current_time]}\n"\
             f"Средняя температура: {data.temp_avg}°C\n"\
             f"Ощущается как: {data.feels_like}°C\n"\
             f"Минимальная температура: {data.temp_min}°C\n"\
