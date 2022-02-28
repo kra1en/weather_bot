@@ -4,6 +4,7 @@ import argparse
 
 from weather import WeatherService
 
+
 __all__ = ['dp', 'engine', 'bot', 'storage', 'weather']
 
 parser = argparse.ArgumentParser("main.py")
@@ -39,5 +40,6 @@ storage = Storage(
 
 
 engine = WebhookModel() if 'webhook' == args.mode[0] else PollingModel()
+memory_storage = engine.get_storage()
 dp = engine.get_dispatcher()
 bot = engine.get_bot()
